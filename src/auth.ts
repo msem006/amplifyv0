@@ -59,5 +59,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     pages: {
         // Force the sign-in flow to use our custom landing page buttons
         signIn: '/'
-    }
+    },
+    trustHost: true
 })
