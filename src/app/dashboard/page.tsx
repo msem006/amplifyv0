@@ -79,21 +79,25 @@ export default async function DashboardPage() {
 
                 {/* ROI Stats Grid: Demonstrates the business value of tracking clicks vs installs */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                    <div className="glass-panel p-6 border-l-4 border-green-500">
+                    <div className="glass-panel p-6 border-l-4 border-green-500 has-tooltip">
                         <div className="text-gray-400 text-xs uppercase tracking-wider mb-2">Reliability Score</div>
                         <div className="text-3xl font-bold">{creator.reliabilityScore}<span className="text-lg text-gray-500">/100</span></div>
+                        <div className="tooltip-text">A weighted score (0-100) based on your historical campaign performance, key usage, and audience engagement quality.</div>
                     </div>
-                    <div className="glass-panel p-6 border-l-4 border-blue-500">
+                    <div className="glass-panel p-6 border-l-4 border-blue-500 has-tooltip">
                         <div className="text-gray-400 text-xs uppercase tracking-wider mb-2">Total Clicks</div>
                         <div className="text-3xl font-bold">{creator.trackingLinks.reduce((a, b) => a + b.clicksCount, 0)}</div>
+                        <div className="tooltip-text">The cumulative number of unique shoppers who clicked your shared Loot Links across all active campaigns.</div>
                     </div>
-                    <div className="glass-panel p-6 border-l-4 border-purple-500">
+                    <div className="glass-panel p-6 border-l-4 border-purple-500 has-tooltip">
                         <div className="text-gray-400 text-xs uppercase tracking-wider mb-2">Verified Installs</div>
                         <div className="text-3xl font-bold">{creator.trackingLinks.reduce((a, b) => a + b.installsCount, 0)}</div>
+                        <div className="tooltip-text">Successful game installations that were directly attributed to your tracking links via the Amplify attribution engine.</div>
                     </div>
-                    <div className="glass-panel p-6 border-l-4 border-yellow-500">
+                    <div className="glass-panel p-6 border-l-4 border-yellow-500 has-tooltip">
                         <div className="text-gray-400 text-xs uppercase tracking-wider mb-2">Est. Earnings</div>
                         <div className="text-3xl font-bold">${estimatedEarnings}</div>
+                        <div className="tooltip-text">Calculated revenue based on verified installs. Note: This prototype uses a flat $5.00 per-install reward model.</div>
                     </div>
                 </div>
 

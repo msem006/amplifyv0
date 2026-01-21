@@ -33,21 +33,25 @@ export default async function AdminPage() {
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                        <div className="glass-panel p-6 border-b-4 border-purple-500">
+                        <div className="glass-panel p-6 border-b-4 border-purple-500 has-tooltip">
                             <div className="text-gray-400 text-xs uppercase tracking-wider mb-2">Total Roster</div>
                             <div className="text-3xl font-bold">{creators.length}</div>
+                            <div className="tooltip-text">Total number of creators currently registered and managed within the Amplify network.</div>
                         </div>
-                        <div className="glass-panel p-6 border-b-4 border-blue-500">
+                        <div className="glass-panel p-6 border-b-4 border-blue-500 has-tooltip">
                             <div className="text-gray-400 text-xs uppercase tracking-wider mb-2">Platform Clicks</div>
                             <div className="text-3xl font-bold">{totalClicks.toLocaleString()}</div>
+                            <div className="tooltip-text">Total aggregate traffic (clicks) recorded across all active drops on the entire platform.</div>
                         </div>
-                        <div className="glass-panel p-6 border-b-4 border-green-500">
+                        <div className="glass-panel p-6 border-b-4 border-green-500 has-tooltip">
                             <div className="text-gray-400 text-xs uppercase tracking-wider mb-2">Verified Installs</div>
                             <div className="text-3xl font-bold text-green-400">{totalInstalls.toLocaleString()}</div>
+                            <div className="tooltip-text">Total number of verified game installations attributed to Amplify tracking links network-wide.</div>
                         </div>
-                        <div className="glass-panel p-6 border-b-4 border-yellow-500">
+                        <div className="glass-panel p-6 border-b-4 border-yellow-500 has-tooltip">
                             <div className="text-gray-400 text-xs uppercase tracking-wider mb-2">Conversion Rate</div>
                             <div className="text-3xl font-bold">{totalClicks > 0 ? ((totalInstalls / totalClicks) * 100).toFixed(2) : 0}%</div>
+                            <div className="tooltip-text">The percentage of platform-wide clicks that converted into a verified game installation.</div>
                         </div>
                     </div>
                 </div>
