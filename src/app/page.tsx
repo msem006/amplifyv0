@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { auth, signIn } from '@/auth';
 import { redirect } from 'next/navigation';
 
+export const dynamic = 'force-dynamic';
+
 export default async function Home() {
   // 1. Session Check: Automatically redirect authenticated users to the dashboard.
   let session = null;
