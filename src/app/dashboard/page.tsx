@@ -3,6 +3,8 @@ import Link from "next/link"
 import { prisma } from "@/lib/prisma"
 import { redirect } from "next/navigation"
 
+export const dynamic = 'force-dynamic'
+
 export default async function DashboardPage() {
     // 1. Session & Auth: Check if user is logged in
     const session = await auth()
