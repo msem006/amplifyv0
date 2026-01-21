@@ -1,0 +1,52 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  // directUrl = env("POSTGRES_URL_NON_POOLING") // Optional for Vercel
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Creator {
+  id              String   @id @default(uuid())
+  email           String   @unique
+  twitchId        String   @unique
+  twitchUsername  String?
+  status          String   @default("WAITING") // WAITING, VERIFIED, BANNED
+  genreTags       String?  // JSON string or comma-separated
+  reliabilityScore Int     @default(50)
+  conversionRate  Float    @default(0.0)
+  keyDebtCount    Int      @default(0)
+  createdAt       DateTime @default(now())
+
+  trackingLinks   TrackingLink[]
+}
+
+model Campaign {
+  id              String   @id @default(uuid())
+  name            String
+  gameTitle       String
+  genre           String
+  status          String   // OPEN, CLOSED, WAITLIST
+  incentiveReward String   // "Use code SAVE5"
+  imageUrl        String?  // Campaign art URL
+  keysAllocated   Int
+  keysClaimed     Int      @default(0)
+  
+  trackingLinks   TrackingLink[]
+}
+
+model TrackingLink {
+  id              String   @id @default(uuid())
+  creatorId       String
+  campaignId      String
+  uniqueCode      String   @unique // e.g. "shroud-neon-1"
+  status          String   @default("ACTIVE")
+  clicksCount     Int      @default(0)
+  installsCount   Int      @default(0) // Attribution event
+  contentUrl      String?  // Proof of play URL
+  
+  creator         Creator  @relation(fields: [creatorId], references: [id])
+  campaign        Campaign @relation(fields: [campaignId], references: [id])
+}
