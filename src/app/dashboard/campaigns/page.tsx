@@ -7,9 +7,12 @@ import { redirect } from "next/navigation"
 export const dynamic = 'force-dynamic'
 
 export default async function CampaignsPage() {
+    // 1. Context check: Ensure the user is logged in as a creator.
     const session = await auth()
     if (!session?.user?.email) redirect("/")
 
+    // 2. State Check: Fetch campaigns and the user's current "Joined" status.
+    // This prevents double-applying and shows which campaigns are already active in their dashboard.
     const [campaigns, creator] = await Promise.all([
         prisma.campaign.findMany({ orderBy: { status: 'asc' } }),
         prisma.creator.findUnique({
@@ -67,8 +70,8 @@ export default async function CampaignsPage() {
                                             </span>
                                         )}
                                         <span className={`px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider backdrop-blur-md ${campaign.status === 'OPEN' ? 'bg-green-500/80 text-white border border-green-500/50' :
-                                                campaign.status === 'WAITLIST' ? 'bg-blue-500/80 text-white border border-blue-500/50' :
-                                                    'bg-gray-700/80 text-gray-300'
+                                            campaign.status === 'WAITLIST' ? 'bg-blue-500/80 text-white border border-blue-500/50' :
+                                                'bg-gray-700/80 text-gray-300'
                                             }`}>
                                             {campaign.status}
                                         </span>
@@ -114,8 +117,8 @@ export default async function CampaignsPage() {
                                             await joinCampaign(campaign.id)
                                         }}>
                                             <button className={`w-full py-2 rounded-lg font-semibold transition-all border ${isWaitlist
-                                                    ? 'bg-blue-900/20 border-blue-500/30 text-blue-300 hover:bg-blue-900/40'
-                                                    : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-purple-500 hover:text-purple-300'
+                                                ? 'bg-blue-900/20 border-blue-500/30 text-blue-300 hover:bg-blue-900/40'
+                                                : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-purple-500 hover:text-purple-300'
                                                 }`}>
                                                 {isWaitlist ? 'Join Waitlist' : 'Apply Now'}
                                             </button>

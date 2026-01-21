@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Amplify V2: Attribution Engine Prototype
 
-## Getting Started
+Welcome to the **Amplify V2** prototype repository. This is a data-driven attribution engine designed to replace traditional key distribution with transparent ROI tracking for game studios and creators.
 
-First, run the development server:
+## 🚀 Key Features
 
+### 1. Data-Driven Attribution (Loot Links)
+Creators no longer just "get a key." They generate unique **Loot Links** (Tracking Links) that track:
+- **Clicks**: Real-time traffic from the creator's audience.
+- **Installs**: Verified game conversions (simulated for the prototype).
+- **ROI**: Transparent performance metrics for both creators and admins.
+
+### 2. Multi-Role Dashboard System
+- **Creator View**: Performance stats, active drops, and an "Offer Wall" to discover and apply for campaigns.
+- **Admin ROI Dashboard**: Platform-wide metrics, campaign conversion rates, and a reliability-ranked creator roster.
+
+### 3. Reliability Scoring
+Creators are ranked by a **Reliability Score** (0-100) based on their historical conversion rates and "Key Debt" status, helping studios identify top-tier talent.
+
+---
+
+## 🛠️ Tech Stack
+- **Framework**: [Next.js 15 (App Router)](https://nextjs.org/)
+- **Auth**: [NextAuth.js v5](https://authjs.dev/)
+- **Database**: [Prisma ORM](https://www.prisma.io/) with PostgreSQL (configured for Vercel)
+- **Styling**: Vanilla CSS with a "Premium-Dark" aesthetic.
+
+---
+
+## 🏁 Getting Started
+
+### 1. Setup Environment
+Copy the example environment file and fill in your credentials:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cp .env.example .env
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Install Dependencies
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Initialize Database
+For local development, ensure you have a Postgres connection string or toggle the provider back to `sqlite` in `schema.prisma`.
+```bash
+npx prisma db push
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 4. Seed Mock Data
+Populate the system with 12 campaigns and 20+ diverse creators:
+```bash
+node scripts/seed-v2.js
+```
 
-## Learn More
+### 5. Run Development Server
+```bash
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🏎️ Prototype Shortcuts
+To streamline the demo experience, we've implemented a **Prototype Switcher** in the top navigation bar. You can instantly switch between:
+- **Top Creator**: Login as a high-tier talent profile.
+- **Admin**: Access the global ROI and roster metrics.
+- **Newbie**: View the "Waiting" state for unverified creators.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## ☁️ Deployment
+This project is configured for one-click deployment to **Vercel**. 
+1. Push to GitHub.
+2. Link to Vercel.
+3. Add **Vercel Postgres** integration.
+4. Set `NEXTAUTH_SECRET` in environment variables.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+*Built with ❤️ for the future of game distribution.*

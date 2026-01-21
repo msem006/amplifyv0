@@ -3,11 +3,12 @@ import { auth, signIn } from '@/auth';
 import { redirect } from 'next/navigation';
 
 export default async function Home() {
+  // 1. Session Check: Automatically redirect authenticated users to the dashboard.
   let session = null;
   try {
     session = await auth();
   } catch (error) {
-    console.error("Auth check error:", error);
+    console.error("Auth check error (likely due to DB reset):", error);
   }
 
   if (session) {
@@ -40,16 +41,18 @@ export default async function Home() {
         </p>
 
         <div className="flex flex-col md:flex-row justify-center gap-4">
+          {/* Prototype Login: This form simulates a Creator login using NextAuth server actions */}
           <form action={async () => {
             "use server"
             await signIn("credentials", { role: "creator", redirectTo: "/dashboard" })
           }}>
             <button className="btn-primary flex items-center gap-2 group w-full md:w-auto justify-center px-8">
               <span className="font-bold">Login as Top Creator</span>
-              <span className="text-xs opacity-75">(Fake Auth)</span>
+              <span className="text-xs opacity-75">(Mock Auth)</span>
             </button>
           </form>
 
+          {/* Prototype Login: Simulates an Admin login */}
           <form action={async () => {
             "use server"
             await signIn("credentials", { role: "admin", redirectTo: "/admin" })

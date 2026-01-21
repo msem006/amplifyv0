@@ -4,12 +4,15 @@ import { prisma } from "@/lib/prisma"
 import { redirect } from "next/navigation"
 
 export default async function DashboardPage() {
+    // 1. Session & Auth: Check if user is logged in
     const session = await auth()
 
     if (!session?.user?.email) {
         redirect("/")
     }
 
+    // 2. Data Ingestion: Fetch the creator's profile along with their active "Tracking Links"
+    // This demonstrates the V2 "Attribution" model vs simple key distribution.
     const creator = await prisma.creator.findUnique({
         where: { email: session.user.email },
         include: {
@@ -19,10 +22,8 @@ export default async function DashboardPage() {
         }
     })
 
-
-
-
-
+    // 3. Fallback: If DB was reset/reseeded, the current browser session might be stale.
+    // We show a clear "Session Expired" screen instead of a raw 404 or crash.
     if (!creator) {
         return (
             <main className="min-h-screen bg-black text-white p-8 flex items-center justify-center">
@@ -74,7 +75,7 @@ export default async function DashboardPage() {
                     </div>
                 </header>
 
-                {/* Stats Grid */}
+                {/* ROI Stats Grid: Demonstrates the business value of tracking clicks vs installs */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                     <div className="glass-panel p-6 border-l-4 border-green-500">
                         <div className="text-gray-400 text-xs uppercase tracking-wider mb-2">Reliability Score</div>
@@ -122,6 +123,7 @@ export default async function DashboardPage() {
                                     </div>
                                 </div>
 
+                                {/* Loot Link Component: This is the core engine feature. The uniqueCode is used for redirection/attribution. */}
                                 <div className="flex flex-col gap-2 w-full lg:w-auto bg-black/40 p-4 rounded-lg border border-white/5">
                                     <div className="text-xs text-gray-400 uppercase tracking-widest mb-1">Your Tracking Link</div>
                                     <div className="flex items-center gap-2 font-mono text-purple-300 bg-purple-500/10 px-3 py-2 rounded text-sm break-all">
