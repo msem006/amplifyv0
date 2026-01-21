@@ -5,7 +5,8 @@ import { redirect } from 'next/navigation';
 export const dynamic = 'force-dynamic';
 
 export default async function Home() {
-  // 1. Session Check: Automatically redirect authenticated users to the dashboard.
+  // 1. Session Check: (Disabled to prevent redirect loops on Vercel deployment if session is stale)
+  /*
   let session = null;
   try {
     session = await auth();
@@ -16,6 +17,7 @@ export default async function Home() {
   if (session) {
     redirect("/dashboard");
   }
+  */
 
   return (
     <main className="min-h-screen flex flex-col justify-center items-center relative overflow-hidden">
