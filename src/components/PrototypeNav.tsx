@@ -7,6 +7,7 @@ export function PrototypeNav() {
     if (pathname === '/') return null; // Don't show on landing page
 
     const views = [
+        { name: "Landing Page", path: "/" },
         { name: "Creator Dashboard", path: "/dashboard" },
         { name: "Admin ROI Engine", path: "/admin" },
         { name: "Offer Wall", path: "/dashboard/campaigns" }
