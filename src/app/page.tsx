@@ -48,7 +48,7 @@ export default async function Home() {
           {/* Prototype Login: This form simulates a Creator login using NextAuth server actions */}
           <form action={async () => {
             "use server"
-            await signIn("credentials", { role: "creator", redirectTo: "/dashboard" })
+            await signIn("credentials", { role: "creator", redirectTo: "/dashboard/campaigns" })
           }}>
             <button className="btn-primary flex items-center gap-2 group w-full md:w-auto justify-center px-8">
               <span className="font-bold">Login as Top Creator</span>
