@@ -18,10 +18,10 @@ export function PrototypeNav() {
         <div className="fixed top-0 left-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10 px-6 py-2 flex justify-between items-center text-xs">
             <div className="flex items-center gap-6 font-mono">
                 <span className="text-purple-400 font-bold tracking-widest bg-purple-500/10 px-2 py-0.5 rounded">AMPLIFY V2</span>
-                <span className="animate-flashing-red select-none">⚠️ PROTOTYPE: HOVER TO SWITCH VIEWS</span>
             </div>
 
             <div className="flex items-center gap-6">
+                <span className="animate-flashing-red select-none text-[10px] tracking-tighter">⚠️ PROTOTYPE: HOVER TO SWITCH VIEWS</span>
                 <div className="nav-dropdown-container">
                     <button className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors uppercase tracking-tight">
                         Current View: <span className="text-white font-bold">{currentViewName}</span>

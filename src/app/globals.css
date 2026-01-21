@@ -114,11 +114,22 @@ body {
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
-  min-width: 160px;
+  min-width: 200px;
   padding: 8px 0;
   z-index: 100;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   margin-top: 8px;
+}
+
+/* Bridge the gap to prevent hover loss */
+.nav-dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 0;
+  width: 100%;
+  height: 12px;
+  display: block;
 }
 
 .nav-dropdown-container:hover .nav-dropdown-menu {
