@@ -78,3 +78,69 @@ body {
 .animate-fade-in {
   animation: fadeIn 0.8s ease-out forwards;
 }
+
+@keyframes flashing-red {
+
+  0%,
+  100% {
+    opacity: 1;
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+  }
+
+  50% {
+    opacity: 0.3;
+    text-shadow: none;
+  }
+}
+
+.animate-flashing-red {
+  animation: flashing-red 1.5s infinite;
+  color: #ff4444;
+  font-weight: bold;
+}
+
+/* Prototype Dropdown */
+.nav-dropdown-container {
+  position: relative;
+  display: inline-block;
+}
+
+.nav-dropdown-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  min-width: 160px;
+  padding: 8px 0;
+  z-index: 100;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  margin-top: 8px;
+}
+
+.nav-dropdown-container:hover .nav-dropdown-menu {
+  display: block;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.nav-dropdown-item {
+  display: block;
+  padding: 10px 16px;
+  color: #aaa;
+  text-decoration: none;
+  transition: all 0.2s;
+  font-size: 0.8rem;
+}
+
+.nav-dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+}
+
+.nav-dropdown-item.active {
+  color: #a855f7;
+  font-weight: bold;
+}
