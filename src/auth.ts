@@ -21,19 +21,29 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                     email = "newbie_streamer@test.com";
                 }
 
-                // Verify the user exists in our local database
-                const user = await prisma.creator.findUnique({
-                    where: { email }
-                });
+                console.log("[Auth] Attempting login for role:", credentials?.role, "Mapped email:", email);
 
-                if (user) {
-                    return {
-                        id: user.id,
-                        email: user.email,
-                        name: user.twitchUsername,
+                try {
+                    // Verify the user exists in our local database
+                    const user = await prisma.creator.findUnique({
+                        where: { email }
+                    });
+
+                    if (user) {
+                        console.log("[Auth] User found:", user.id);
+                        return {
+                            id: user.id,
+                            email: user.email,
+                            name: user.twitchUsername,
+                        }
+                    } else {
+                        console.error("[Auth] User NOT found for email:", email);
+                        return null;
                     }
+                } catch (error) {
+                    console.error("[Auth] Database/Server Error during authorization:", error);
+                    throw new Error("Internal Server Error during Login Check");
                 }
-                return null
             }
         })
     ],
